@@ -2,7 +2,9 @@ package com.lambdaschool.crudyrestaurants.models;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * The entity allowing interaction with the restaurants table.
@@ -56,6 +58,11 @@ public class Restaurant
             orphanRemoval = true)
     private List<Menu> menu = new ArrayList<>();
 
+    @ManyToMany
+    @JoinTable(name = "restaurantpayments",
+                joinColumns = @JoinColumn(name = "restaurantid"),
+                inverseJoinColumns = @JoinColumn(name = "paymentid"))
+    private Set<Payment> payments = new HashSet<>();
     /**
      * Default constructor used primarily by the JPA.
      */
@@ -238,5 +245,13 @@ public class Restaurant
 
     public void setMenu(List<Menu> menu) {
         this.menu = menu;
+    }
+
+    public Set<Payment> getPayments() {
+        return payments;
+    }
+
+    public void setPayments(Set<Payment> payments) {
+        this.payments = payments;
     }
 }
