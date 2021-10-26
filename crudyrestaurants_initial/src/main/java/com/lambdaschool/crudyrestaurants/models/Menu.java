@@ -15,12 +15,17 @@ public class Menu {
 
     private double price;
 
+    @ManyToOne
+    @JoinColumn(name = "restaurantid", nullable = false)
+    private Restaurant restaurant;
+
     public Menu() {
     }
 
-    public Menu(String dish, double price) {
+    public Menu(String dish, double price, Restaurant restaurant) {
         this.dish = dish;
         this.price = price;
+        this.restaurant = restaurant;
     }
 
     public long getMenuid() {
@@ -45,5 +50,13 @@ public class Menu {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
+
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
     }
 }
