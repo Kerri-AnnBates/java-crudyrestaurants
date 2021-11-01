@@ -56,7 +56,7 @@ public class Restaurant
     @OneToMany(mappedBy = "restaurant",
             cascade = CascadeType.ALL,
             orphanRemoval = true)
-    private List<Menu> menu = new ArrayList<>();
+    private List<Menu> menus = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(name = "restaurantpayments",
@@ -239,12 +239,12 @@ public class Restaurant
         this.seatcapacity = seatcapacity;
     }
 
-    public List<Menu> getMenu() {
-        return menu;
+    public List<Menu> getMenus() {
+        return menus;
     }
 
-    public void setMenu(List<Menu> menu) {
-        this.menu = menu;
+    public void setMenus(List<Menu> menus) {
+        this.menus = menus;
     }
 
     public Set<Payment> getPayments() {
