@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,21 +34,27 @@ public class RestaurantServicesImpl  implements RestaurantServices {
 
     @Override
     public Restaurant findRestaurantById(long id) {
-        return null;
+        return restaurantRepos.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Restaurant id: " + id + " not found!"));
     }
 
     @Override
     public Restaurant findRestaurantByName(String name) {
-        return null;
+        Restaurant restaurant = restaurantRepos.findByName(name);
+        if(restaurant == null) {
+            throw new EntityNotFoundException("Restaurant " + name + " not found!");
+        }
+
+        return restaurant;
     }
 
     @Override
     public List<Restaurant> findByNameLike(String subname) {
-        return null;
+        return restaurantRepos.findByNameContainingIgnoreCase(subname);
     }
 
     @Override
     public List<Restaurant> findByDishLike(String subdish) {
-        return null;
+        return restaurantRepos.findByMenus_dishContainingIgnoreCase(subdish);
     }
 }
