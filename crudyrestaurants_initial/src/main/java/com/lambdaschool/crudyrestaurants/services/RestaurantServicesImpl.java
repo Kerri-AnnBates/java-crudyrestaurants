@@ -2,6 +2,7 @@ package com.lambdaschool.crudyrestaurants.services;
 
 import com.lambdaschool.crudyrestaurants.models.Restaurant;
 import com.lambdaschool.crudyrestaurants.repositories.RestaurantRepository;
+import com.lambdaschool.crudyrestaurants.views.MenuCounts;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -56,5 +57,10 @@ public class RestaurantServicesImpl  implements RestaurantServices {
     @Override
     public List<Restaurant> findByDishLike(String subdish) {
         return restaurantRepos.findByMenus_dishContainingIgnoreCase(subdish);
+    }
+
+    @Override
+    public List<MenuCounts> getMenuCounts() {
+        return restaurantRepos.findMenuCounts();
     }
 }
