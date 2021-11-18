@@ -63,4 +63,16 @@ public class RestaurantServicesImpl  implements RestaurantServices {
     public List<MenuCounts> getMenuCounts() {
         return restaurantRepos.findMenuCounts();
     }
+
+    @Transactional
+    @Override
+    public void deleteById(long id) {
+        if (restaurantRepos.findById(id).isPresent()) {
+            restaurantRepos.deleteById(id);
+        } else {
+            throw new EntityNotFoundException("Restaurant " + id + " not found!");
+        }
+    }
+
+
 }
