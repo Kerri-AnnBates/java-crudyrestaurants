@@ -15,4 +15,5 @@ public interface RestaurantServices {
     List<Restaurant> findByDishLike(String subdish);
     List<MenuCounts> getMenuCounts();
     void deleteById(long id);
+    Restaurant update(Restaurant restaurant, long id);
 }
